@@ -7,30 +7,23 @@ import InputNumber from 'src/components/inputNumber'
 import { useForm, Controller } from 'react-hook-form'
 import { Schema, schema } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { NoUndefinedField } from 'src/types/utils.type'
 import RatingStars from 'src/pages/productList/components/ratingStars'
 import { omit } from 'lodash'
 import { QueryConfig } from 'src/hooks/useQreryConfig'
-
 import { useTranslation } from 'react-i18next'
-// import InputV2 from 'src/components/InputV2'
 interface Props {
   queryConfig: QueryConfig
   categories: Category[]
 }
-// type FormData = {
-//   price_min: string
-//   price_max: string
-// }
-type FormData = NoUndefinedField<Pick<Schema, 'price_max' | 'price_min'>>
+
+// type FormData = NoUndefinedField<Pick<Schema, 'price_max' | 'price_min'>>
+type FormData = Pick<Schema, 'price_max' | 'price_min'>
 const priceSchema = schema.pick(['price_min', 'price_max'])
 
 export default function AsideFilter({ queryConfig, categories }: Props) {
-  //truyeenf vào trong cái tham số củauseTranslation là cái nname space
-  const { t } = useTranslation(['home'])
-  const { category } = queryConfig //lấy trên url
-  // console.log('1', category)
-  // console.log('2', categories)
+  const { t } = useTranslation('home')
+  const { category } = queryConfig
+
   const navigate = useNavigate()
   const {
     control,
@@ -42,8 +35,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
       price_min: '',
       price_max: ''
     },
-    resolver: yupResolver(priceSchema),
-    shouldFocusError: false
+    resolver: yupResolver(priceSchema)
   })
   const onSubmit = handleSubmit((data) => {
     navigate({
@@ -161,18 +153,6 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                 )
               }}
             />
-            {/* <InputV2
-              control={control}
-              name='price_min'
-              type='number'
-              className='flex-row-1'
-              placeholder='từ'
-              onChange={() => {
-                trigger('price_max')
-              }}
-              classNameError='hidden'
-              classNameInput='px-1 py-1 text-sm w-full outline-none border border-gray-300 focus:border-gray-500'
-            ></InputV2> */}
 
             <div className='flex-shrink-0 mx-2 mt-2'>-</div>
             <Controller
@@ -183,9 +163,6 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
                   <InputNumber
                     type='text'
                     className='flex-row-1'
-                    // value={field.value}
-                    // ref={field.ref}
-                    //tối giản bằng cách
                     placeholder='đến'
                     {...field}
                     onChange={(e) => {
