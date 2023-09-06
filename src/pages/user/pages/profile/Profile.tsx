@@ -15,6 +15,7 @@ import { setProfileFromLS } from 'src/utils/auth'
 import { getAvatarUrl, isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/types/utils.type'
 import InputFile from 'src/components/InputFile'
+import { Helmet } from 'react-helmet'
 
 type FormData = Omit<UserSchema, 'password' | 'new_password' | 'confirm_password'> & {
   name: string | undefined
@@ -111,6 +112,10 @@ export default function Profile() {
 
   return (
     <div className='px-2 pb-10 bg-white rounded-sm shadow md:px-7 md:pb-20'>
+      <Helmet>
+        <title>Thông tin người dùng</title>
+        <meta name='description' content='Thông tin người dùng' />
+      </Helmet>
       <div className='py-6 border-b border-b-gray-200'>
         <h1 className='text-lg font-medium text-gray-900'>Hồ sơ của tôi</h1>
         <div className='mt-1 text-sm text-gray-700'>Quản lí thông tin hồ sơ để bảo mật tài khoản</div>

@@ -12,6 +12,7 @@ import purchaseApi from 'src/apis/purchase.api'
 import { purchasesStatus } from 'src/constants/purchase'
 import { toast } from 'react-toastify'
 import path from 'src/constants/path'
+import { Helmet } from 'react-helmet'
 export default function ProductDetail() {
   const queryClient = useQueryClient()
   const { nameId } = useParams()
@@ -126,6 +127,10 @@ export default function ProductDetail() {
   if (!product) return null
   return (
     <div className='py-6 bg-gray-200'>
+      <Helmet>
+        <title>{product.name} | ShopeeClone</title>
+        <meta name='description' content='chi tiết sản phẩm' />
+      </Helmet>
       <div className='container'>
         <div className='p-4 bg-white shadow'>
           <div className='grid grid-cols-12 gap-9'>

@@ -13,6 +13,7 @@ import { keyBy } from 'lodash'
 import { toast } from 'react-toastify'
 import { AppContext } from 'src/context/app.context'
 import noproduct from 'src/assets/image/no-product.png'
+import { Helmet } from 'react-helmet'
 
 export default function Cart() {
   const { extendedPurchases, setExtendedPurchases } = useContext(AppContext)
@@ -156,6 +157,10 @@ export default function Cart() {
 
   return (
     <div className='py-16 bg-neutral-100'>
+      <Helmet>
+        <title>Giỏ hàng</title>
+        <meta name='description' content='Giỏ hàng' />
+      </Helmet>
       <div className='container'>
         {extendedPurchases.length > 0 ? (
           <>

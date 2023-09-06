@@ -7,6 +7,7 @@ import Pagination from 'src/components/paginate'
 import { ProductListConfig } from 'src/types/product.type'
 import categoryApi from 'src/apis/category.api'
 import useQreryConfig from 'src/hooks/useQreryConfig'
+import { Helmet } from 'react-helmet'
 
 export default function ProductList() {
   // chỉ lấy những acsi này từ query params thôi
@@ -32,6 +33,10 @@ export default function ProductList() {
   })
   return (
     <div className='py-6 bg-gray-200'>
+      <Helmet>
+        <title>Trang chủ ShopeeClone</title>
+        <meta name='description' content='Trang chủ ShopeeClone' />
+      </Helmet>
       <div className='container'>
         {productData && (
           <div className='grid grid-cols-12 gap-6'>
